@@ -9,4 +9,4 @@ Returns the min, max, and average temperatures calculated from the given start d
 I tried several changes but couldn't figure out the dates.   I had to use AI to help, but still could complete it. 
 #REFERENCE: https://docs.sqlalchemy.org/en/14/core/engines.html#sqlite
 #REFERENCE: https://flask.palletsprojects.com/en/2.2.x/quickstart/
-#REFERECE: CHATGPT
+#REFERENCE: CHATGPT
