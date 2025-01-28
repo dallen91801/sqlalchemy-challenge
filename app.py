@@ -1,35 +1,45 @@
+
 from flask import Flask, jsonify
 from sqlalchemy import create_engine, func
-from sqlalchemy.orm import Session
 from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
 import numpy as np
 import datetime as dt
 
-# Setup Database
-# Correcting the file path for the SQLite database.
-engine = create_engine("sqlite:///C:/Users/board/sqlalchemy-challenge/Resources/hawaii.sqlite")
+#################################################
+# Database Setup 
+#################################################
+engine = create_engine("sqlite:///hawaii.sqlite")   #REFERENCE: https://docs.sqlalchemy.org/en/14/core/engines.html#sqlite
 
-# Reflect the database into a new model
+# reflect an existing database into a new model
 Base = automap_base()
 Base.prepare(engine, reflect=True)
 
-# Save references to each table
+# reflect the tables
 Measurement = Base.classes.measurement
 Station = Base.classes.station
 
-# Create a Flask app
+# Create our session (link) from Python to the DB
+session = Session(engine)
+
+#################################################
+# Flask Setup
+#################################################
 app = Flask(__name__)
 
-# Home route
-@app.route("/")
-def home():
+#################################################
+# Flask Routes
+#################################################
+@app.route("/")                                         # REFERENCE: https://flask.palletsprojects.com/en/2.2.x/quickstart/
+def welcome():
     return (
+        f"Welcome to the Hawaii Climate API!<br/>"
         f"Available Routes:<br/>"
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
-        f"/api/v1.0/&lt;start&gt;<br/>"
-        f"/api/v1.0/&lt;start&gt;/&lt;end&gt;<br/>"
+        f"/api/v1.0/<start><br/>"
+        f"/api/v1.0/<start>/<end><br/>"
     )
 
 # Precipitation route
@@ -93,7 +103,7 @@ def tobs():
     return jsonify(tobs_list)
 
 # Start and start/end range route
-@app.route("/api/v1.0/<start>")
+@app.route("/api/v1.0/<start>")    # Reference:  chatgpt
 @app.route("/api/v1.0/<start>/<end>")
 def stats(start, end=None):
     session = Session(engine)
