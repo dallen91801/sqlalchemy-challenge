@@ -7,3 +7,6 @@ A start/end route that:
 Accepts the start and end dates as parameters from the URL (3 points)
 Returns the min, max, and average temperatures calculated from the given start date to the given end date (6 points)
 I tried several changes but couldn't figure out the dates.   I had to use AI to help, but still could complete it. 
+#REFERENCE: https://docs.sqlalchemy.org/en/14/core/engines.html#sqlite
+#REFERENCE: https://flask.palletsprojects.com/en/2.2.x/quickstart/
+#REFERECE: CHATGPT
